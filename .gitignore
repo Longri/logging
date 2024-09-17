@@ -1,0 +1,9 @@
+/_RELEASE/
+/build/
+/.gradle/
+/.idea/
+/.run/
+/Test/
+/storedPreferences.xml
+/gradle.properties.local
+
