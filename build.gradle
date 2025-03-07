@@ -1,11 +1,11 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "com.github.ben-manes.versions" version "0.51.0"
+    id "com.github.ben-manes.versions" version "0.52.0"
 }
 
 group 'de.longri'
-version '4.1.0'
+version '4.1.1'
 
 repositories {
     mavenCentral()
@@ -17,9 +17,24 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.11.0'
+    junitVersion = '5.11.4'
 }
 
+dependencyUpdates {
+    resolutionStrategy {
+        componentSelection {
+            all {
+                // Schließt alle Abhängigkeiten aus, die mit 'org.openjfx' (JavaFX) beginnen
+                if (candidate.group == 'org.openjfx') {
+                    reject('JavaFX dependencies are excluded')
+                }
+                if (candidate.group == 'org.junit.jupiter') {
+                    reject('JUnit dependencies are excluded')
+                }
+            }
+        }
+    }
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
